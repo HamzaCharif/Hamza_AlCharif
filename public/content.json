@@ -1,0 +1,244 @@
+{
+  "_howToEdit": "Edit text here and push to GitHub. To add a project: copy one item block, change the fields, set status to done, ongoing or planned. progress is 0-100 and only shows for ongoing items.",
+  "profile": {
+    "name": "Hamza AlCharif",
+    "role": "Computer Science @ AUS · Software, AI & Robotics",
+    "location": "Dubai, UAE",
+    "email": "hamzaalcharif06@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/alcharif",
+    "github": "https://github.com/HamzaCharif",
+    "cv": "./media/Hamza_AlCharif_CV.pdf"
+  },
+  "sections": {
+    "me": {
+      "title": "Hi, I'm Hamza",
+      "body": [
+        "Computer Science senior at the American University of Sharjah, graduating Spring 2027.",
+        "I like engineering that solves real problems: defense and safety systems, tech that helps people walk or see again, and systems that spot emergencies and get help faster.",
+        "Looking for software, AI, robotics and defense-tech roles and internships."
+      ]
+    },
+    "projects": {
+      "title": "Projects",
+      "items": [
+        {
+          "name": "Quantum Security Challenge — CSAW'26 QSec",
+          "status": "done",
+          "period": "Nov 2026",
+          "badge": "3rd place · MENA",
+          "summary": "Solved all 4 quantum security challenges as a 3-person team at NYU Abu Dhabi. Built white- and black-box adversarial attacks on quantum road-sign classifiers and defenses that raised robust accuracy from 0.63 to 0.76.",
+          "tags": [
+            "Python",
+            "Quantum ML",
+            "Adversarial attacks",
+            "Security"
+          ],
+          "links": []
+        },
+        {
+          "name": "Confidence-Guided Multimodal Waste Sorting Conveyor",
+          "status": "ongoing",
+          "progress": 35,
+          "period": "2026 – 2027 · Senior Design",
+          "summary": "Recyclable-waste sorting conveyor scaling from 3 to 11 classes by fusing camera vision with spectral, infrared and inductive sensors on an NVIDIA Jetson Orin Nano, with servo actuators and confidence-aware decisions.",
+          "tags": [
+            "Jetson Orin Nano",
+            "Computer vision",
+            "Sensor fusion",
+            "3D printing"
+          ],
+          "links": []
+        }
+      ]
+    },
+    "experience": {
+      "title": "Experience & Research",
+      "items": [
+        {
+          "name": "Software Development Intern — GAES",
+          "status": "done",
+          "period": "Jun – Jul 2026 · Sharjah",
+          "summary": "Built an offline exam generator and question-bank manager in Python/Flask for an EASA Part-147 aviation training organisation, then presented it to company leadership.",
+          "tags": [
+            "Python",
+            "Flask",
+            "SQLite",
+            "Playwright"
+          ],
+          "links": []
+        },
+        {
+          "name": "Undergraduate Research Assistant — AUS",
+          "status": "ongoing",
+          "period": "2025 – present",
+          "summary": "Blockchain-based trust layer for IoT devices (Sui + oneM2M). Primary applicant on an undergraduate research grant proposal and co-author of a literature review on autonomous waste-sorting robots.",
+          "tags": [
+            "IoT",
+            "Blockchain",
+            "Docker",
+            "Research"
+          ],
+          "links": []
+        }
+      ]
+    },
+    "building": {
+      "title": "Currently building",
+      "items": [
+        {
+          "id": "drone",
+          "name": "GPS-free autonomous drone",
+          "status": "ongoing",
+          "progress": 10,
+          "period": "Started Nov 2026",
+          "summary": "Coming soon. A 3D-printed drone that navigates without GPS.",
+          "tags": [
+            "3D printing",
+            "Fusion 360",
+            "Autonomy"
+          ],
+          "links": []
+        },
+        {
+          "id": "tba",
+          "name": "Night vision goggles / Wi-Fi through-wall sensing",
+          "status": "planned",
+          "period": "TBA",
+          "summary": "Coming soon.",
+          "tags": [],
+          "links": []
+        }
+      ]
+    },
+    "awards": {
+      "title": "Awards",
+      "items": [
+        {
+          "name": "3rd place — CSAW'26 Quantum Security Challenge (MENA)",
+          "status": "done",
+          "period": "Nov 2026",
+          "summary": "NYU Abu Dhabi.",
+          "tags": [],
+          "links": []
+        },
+        {
+          "name": "Dean's List",
+          "status": "done",
+          "period": "AUS",
+          "summary": "",
+          "tags": [],
+          "links": []
+        },
+        {
+          "name": "Merit Scholarship",
+          "status": "done",
+          "period": "AUS",
+          "summary": "",
+          "tags": [],
+          "links": []
+        }
+      ]
+    },
+    "about": {
+      "title": "About me",
+      "body": [
+        "What drives me: engineering for a better life. Defense and safety systems, assistive tech that helps people walk or see, and sensors that detect emergencies and call for help.",
+        "Into: fighter jets and aerospace (the Su-57 and Su-47 on my wall), drones, robotics, computer vision and 3D printing.",
+        "Off the desk: gaming, films and the gym.",
+        "Languages: Arabic (native, with a deep Arabic literature background) and English (fluent)."
+      ]
+    },
+    "github": {
+      "title": "GitHub",
+      "body": [
+        "Code, experiments and write-ups."
+      ],
+      "cta": {
+        "label": "Open GitHub",
+        "href": "https://github.com/HamzaCharif"
+      }
+    },
+    "contact": {
+      "title": "Contact",
+      "body": [
+        "Open to internships and graduate roles. The quickest way to reach me is email."
+      ],
+      "cta": {
+        "label": "Download my CV",
+        "href": "./media/Hamza_AlCharif_CV.pdf"
+      }
+    },
+    "music": {
+      "title": "Music",
+      "body": [
+        "My playlist plays in the corner while you look around. Pick any song from the player."
+      ],
+      "links": [
+        {
+          "label": "Open my playlist on Spotify",
+          "href": "https://open.spotify.com/playlist/1HVP7E8RkpieiGSxvATJbU"
+        }
+      ],
+      "playlist": "spotify:playlist:1HVP7E8RkpieiGSxvATJbU"
+    },
+    "skills": {
+      "title": "Skills & tools",
+      "body": [
+        "The stack I reach for, grouped by what it's for."
+      ],
+      "items": [
+        {
+          "name": "Languages",
+          "summary": "",
+          "tags": [
+            "Python",
+            "Java",
+            "C/C++",
+            "JavaScript / TypeScript",
+            "SQL",
+            "x86 Assembly"
+          ],
+          "links": []
+        },
+        {
+          "name": "AI & vision",
+          "summary": "",
+          "tags": [
+            "PyTorch",
+            "Computer vision",
+            "Sensor fusion",
+            "Adversarial ML",
+            "Dataset building"
+          ],
+          "links": []
+        },
+        {
+          "name": "Robotics & hardware",
+          "summary": "",
+          "tags": [
+            "NVIDIA Jetson",
+            "Servo / actuator control",
+            "Inverse kinematics",
+            "3D printing",
+            "Fusion 360"
+          ],
+          "links": []
+        },
+        {
+          "name": "Web & tools",
+          "summary": "",
+          "tags": [
+            "Flask",
+            "React / Next.js",
+            "SQLite / MySQL",
+            "Supabase",
+            "Docker",
+            "Git",
+            "Playwright"
+          ],
+          "links": []
+        }
+      ]
+    }
+  }
+}
