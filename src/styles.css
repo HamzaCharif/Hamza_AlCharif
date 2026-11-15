@@ -568,7 +568,17 @@ body {
 .os-exit { background: var(--lamp); color: #2a1a06 !important; font-weight: 700; }
 .os-hint { margin: 0; color: #cfc6e0; font-family: var(--font-hand); font-size: 15px; }
 @media (max-width: 760px) {
-  .os-screen { aspect-ratio: auto; height: calc(100% - 70px); border-width: 6px; }
+  .os-screen { aspect-ratio: auto; height: calc(100dvh - 90px); max-height: none; border-width: 6px; }
   .os-window { width: calc(100% - 16px); left: 8px !important; }
   .os-icon { width: 72px; }
+}
+
+@media (max-width: 640px) {
+  .stations { flex-wrap: wrap; justify-content: center; border-radius: 18px; width: calc(100vw - 24px); box-sizing: border-box; overflow: visible; }
+  .stations button { padding: 7px 11px; font-size: 13px; }
+  .stations .walk { border-left: 0; margin-left: 0; border-radius: 999px; }
+  .hint { bottom: calc(112px + env(safe-area-inset-bottom, 0px)); font-size: 13px; }
+  .hud strong { font-size: 26px; }
+  .hud span { font-size: 11px; max-width: 55vw; }
+  .tag { font-size: 13px; padding: 5px 9px 5px 8px; }
 }

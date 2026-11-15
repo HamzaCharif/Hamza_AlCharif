@@ -240,7 +240,7 @@ export default function Desktop() {
           <button className="os-exit" onClick={exit}>Back to room</button>
         </footer>
       </div>
-      <p className="os-hint">double-click an icon to open it · Esc to go back</p>
+      <p className="os-hint">open an icon with a double-click (or one tap on a phone) · Esc to go back</p>
     </div>
   )
 }

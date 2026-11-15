@@ -17,6 +17,8 @@ const spherical = (cam, target) => {
 // so the camera can never end up inside a wall or the ceiling.
 function Rig() {
   const ref = useRef()
+  const camera = useThree((s) => s.camera)
+  const size = useThree((s) => s.size)
   const focus = useLab((s) => s.focus)
   const entered = useLab((s) => s.entered)
   const station = useLab((s) => s.station)
@@ -29,7 +31,15 @@ function Rig() {
       c.setLookAt(2.6, 2.1, 2.2, ...STATIONS.room.target, false)
       return
     }
-    const v = focus ? HOTSPOTS[focus] : STATIONS[station]
+    const base = focus ? HOTSPOTS[focus] : STATIONS[station]
+    // Tall phone screens see a much narrower slice of the room, so step the camera back
+    // and widen the lens a little; everything in the shot (and its labels) stays on screen.
+    const aspect = window.innerWidth / window.innerHeight
+    const k = focus ? (aspect < 1 ? 1.25 : 1) : aspect < 0.8 ? 1.5 : aspect < 1.2 ? 1.2 : 1
+    const cam = base.cam.map((x, i) => base.target[i] + (x - base.target[i]) * k)
+    camera.fov = aspect < 0.8 ? 62 : 50
+    camera.updateProjectionMatrix()
+    const v = { cam, target: base.target }
     const sp = spherical(v.cam, v.target)
     // lock the orbit to a small window around this shot
     const look = focus ? 0 : 0.28
@@ -44,7 +54,7 @@ function Rig() {
     const d = sp.radius
     const side = focus && focus !== 'monitor'
     c.setFocalOffset(side && wide ? d * 0.3 : 0, side && !wide ? -d * 0.22 : 0, 0, true)
-  }, [focus, entered, station, walking])
+  }, [focus, entered, station, walking, size.width, size.height])
 
   if (walking) return null
   return (

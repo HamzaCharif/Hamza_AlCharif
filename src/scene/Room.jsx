@@ -127,7 +127,7 @@ export default function Room() {
         <Basketball p={[-3.15, 0.12, 0.55]} />
         <Model url="./models/plant.json" height={0.95} position={[4.1, 0, -2.45]} rotation={[0, 0.6, 0]} />
         <Model url="./models/plant.json" height={0.7} position={[-2.75, 0, 2.15]} rotation={[0, 2.0, 0]} />
-        <Hotspot id="me" labelAt={[-0.8, 1.6, -3.3]}>
+        <Hotspot id="me" labelAt={[-0.8, 1.8, -3.3]}>
           <Character position={[-0.8, 0, -3.28]} />
         </Hotspot>
       </Occluder>

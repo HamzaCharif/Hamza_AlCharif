@@ -371,7 +371,7 @@ function Speakers() {
     </group>
   )
   return (
-    <Hotspot id="music" labelAt={[0.68, 1.12, -4.32]}>
+    <Hotspot id="music" labelAt={[0.5, 1.12, -4.32]}>
       {one(-1.27, 0)}
       {one(0.7, 1)}
     </Hotspot>
