@@ -57,7 +57,7 @@ export function WindowFrame({ x0 = 1.3, x1 = 3.3, y0 = 0.95, y1 = 2.65, z = -4.5
 // ---------- Edison bulbs on a sagging cable (clearly lamps, not markers) ----------
 export function EdisonLights() {
   const { curve, bulbs } = useMemo(() => {
-    const anchors = [[-1.9, 2.95], [-0.6, 2.95], [0.7, 2.95], [2.0, 2.95], [3.4, 2.95]]
+    const anchors = [[-3.0, 2.95], [-1.6, 2.95], [-0.05, 2.95], [1.35, 2.95], [2.65, 2.95], [3.95, 2.95]]
     const pts = []
     const bulbs = []
     for (let i = 0; i < anchors.length - 1; i++) {
@@ -69,7 +69,7 @@ export function EdisonLights() {
       }
       bulbs.push([(x0 + x1) / 2, y0 - 0.28, -4.36])
     }
-    pts.push(new THREE.Vector3(3.4, 2.95, -4.36))
+    pts.push(new THREE.Vector3(3.95, 2.95, -4.36))
     return { curve: new THREE.CatmullRomCurve3(pts), bulbs }
   }, [])
   const group = useRef()

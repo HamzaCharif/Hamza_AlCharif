@@ -2,63 +2,63 @@ import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Outlines } from '@react-three/drei'
 import * as THREE from 'three'
-import { Ball, Limb, Toon, toonRamp } from './parts'
-import { MarchingCubes } from 'three/examples/jsm/objects/MarchingCubes.js'
-import { plaid } from './textures'
+import { Ball, Limb, Toon } from './parts'
 
 // Hamza in the style of an anime film: realistic proportions, simple soft shapes, thin ink outline.
 // Seated, facing the monitors (-z), hands on the keyboard.
 const SKIN = '#e2b18c'
-const HAIR = '#1b1310'
-const HOODIE = '#cdb99c'
-const HOODIE_DK = '#b39f83'
-const JEANS = '#36425e'
-const SOCKS = '#ece6da'
+const HAIR = '#241812'
+const HOODIE = '#6f8669'
+const HOODIE_DK = '#5e7459'
+const JEANS = '#9a9ca6'
+const SOCKS = '#efe4d2'
 const OL = 0.0035
 
-// Dark curly hair as one smooth surface (metaballs): full, voluminous curls on top that fall
-// forward over the forehead, shorter at the sides and back.
-const HAIR_SCALE = 0.19
-function toUnit(v) { return v / HAIR_SCALE / 2 + 0.5 }
-function Hair() {
-  const mc = useMemo(() => {
-    const mat = new THREE.MeshToonMaterial({ color: HAIR, gradientMap: toonRamp() })
-    const m = new MarchingCubes(48, mat, false, false, 60000)
-    m.isolation = 80
-    m.reset()
-    const ball = (x, y, z, R) => m.addBall(toUnit(x), toUnit(y), toUnit(z), R * R / (HAIR_SCALE * HAIR_SCALE * 4) * 92, 12)
-    // base cap hugging the skull (top and back)
-    ball(0, 0.045, 0.015, 0.112)
-    ball(0, 0.0, 0.04, 0.1)
-    let seed = 11
-    const r = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
-    // big curls over the crown
-    for (let i = 0; i < 34; i++) {
-      const theta = r() * Math.PI * 2
-      const phi = r() * 1.05
-      const R = 0.118 + r() * 0.02
-      const x = Math.sin(phi) * Math.cos(theta) * R
-      const z = Math.sin(phi) * Math.sin(theta) * R + 0.01
-      const y = Math.cos(phi) * R * 0.95 + 0.06
-      ball(x, y, z, 0.032 + r() * 0.014)
+// Natural dark hair: one smooth sculpted shape around the head with a soft wavy surface,
+// fuller on top, a fringe falling forward, tapered at the sides and back.
+function noise3(x, y, z) {
+  return Math.sin(x * 37.0 + Math.sin(z * 23.0)) * Math.cos(y * 31.0 + Math.sin(x * 19.0)) * Math.sin(z * 29.0 + y * 7.0)
+}
+function useHairGeometry() {
+  return useMemo(() => {
+    const g = new THREE.SphereGeometry(0.118, 72, 54)
+    const p = g.attributes.position
+    const v = new THREE.Vector3()
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i)
+      const n = v.clone().normalize()
+      // hairline: low at the back, higher at the temples, highest over the forehead (face is -z)
+      const front = Math.max(0, -n.z)
+      const hairline = THREE.MathUtils.lerp(-0.55, 0.32, front) - Math.abs(n.x) * 0.15 * (1 - front)
+      let r = 0.118
+      if (n.y < hairline) {
+        r = 0.104 // tucked under the skin below the hairline
+      } else {
+        const top = Math.max(0, n.y)
+        r += 0.012 + top * 0.03 // volume on top
+        r += noise3(n.x, n.y, n.z) * 0.006 * (0.4 + top) // soft waves/curls
+        r -= Math.abs(n.x) * 0.006 * (1 - top) // tapered sides
+      }
+      v.copy(n).multiplyScalar(r)
+      // fringe: front-top strands fall forward a little
+      if (n.z < -0.3 && n.y > 0.15) {
+        v.z -= 0.012 * (n.y - 0.15)
+        v.y -= 0.01 * Math.max(0, -n.z - 0.3)
+      }
+      p.setXYZ(i, v.x, v.y, v.z)
     }
-    // shorter curls down the back and sides
-    for (let i = 0; i < 16; i++) {
-      const theta = Math.PI * 0.15 + r() * Math.PI * 0.7 // back half
-      const x = Math.cos(theta) * 0.105 * (r() > 0.5 ? 1 : -1)
-      const z = Math.sin(theta) * 0.1 + 0.01
-      ball(x, -0.01 + r() * 0.05, z, 0.024 + r() * 0.008)
-    }
-    // fringe of curls falling onto the forehead
-    ;[[-0.055, 0.075, -0.085], [-0.02, 0.085, -0.098], [0.02, 0.08, -0.1], [0.055, 0.07, -0.088], [0.0, 0.05, -0.105]].forEach(([x, y, z]) =>
-      ball(x, y, z, 0.026)
-    )
-    m.update()
-    m.castShadow = true
-    m.scale.setScalar(HAIR_SCALE)
-    return m
+    g.computeVertexNormals()
+    return g
   }, [])
-  return <primitive object={mc} />
+}
+
+function Hair() {
+  const geo = useHairGeometry()
+  return (
+    <mesh geometry={geo} position={[0, 0.02, 0.008]} castShadow>
+      <Toon c={HAIR} />
+    </mesh>
+  )
 }
 
 function Hand({ side }) {
@@ -102,63 +102,6 @@ function Arm({ side }) {
   )
 }
 
-// A soft plaid blanket draped like a cape: wraps the shoulders, falls down the back
-// and over the arms, with gentle folds.
-function useCapeGeometry() {
-  return useMemo(() => {
-    const cols = 48, rows = 24
-    const pos = [], uv = [], idx = []
-    for (let j = 0; j <= rows; j++) {
-      const v = j / rows // 0 at the shoulders, 1 at the hem
-      for (let i = 0; i <= cols; i++) {
-        const u = i / cols
-        const th = (u - 0.5) * Math.PI * 1.45 // wraps from one arm, around the back, to the other
-        const fold = Math.sin(th * 9 + v * 2) * 0.012 * (0.3 + v)
-        const rad = 0.2 + v * 0.09 + fold
-        const wide = 1.22 - v * 0.15
-        let x = Math.sin(th) * rad * wide
-        let z = Math.cos(th) * rad * 0.8 + 0.04
-        let y = 1.06 - v * 0.52
-        // the top edge rolls over the shoulders a little
-        y += Math.cos(th) * 0.015 * (1 - v)
-        // sides drape forward over the arms
-        z -= Math.max(0, Math.abs(th) - 1.0) * 0.12 * v
-        pos.push(x, y, z)
-        uv.push(u * 2.2, v * 1.6)
-      }
-    }
-    for (let j = 0; j < rows; j++)
-      for (let i = 0; i < cols; i++) {
-        const a = j * (cols + 1) + i, b = a + 1, c = a + cols + 1, d = c + 1
-        idx.push(a, c, b, b, c, d)
-      }
-    const g = new THREE.BufferGeometry()
-    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3))
-    g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2))
-    g.setIndex(idx)
-    g.computeVertexNormals()
-    return g
-  }, [])
-}
-
-function Blanket() {
-  const map = useMemo(() => plaid(), [])
-  const geo = useCapeGeometry()
-  return (
-    <group>
-      <mesh geometry={geo} castShadow receiveShadow>
-        <Toon map={map} c="#ffffff" side={THREE.DoubleSide} />
-        <Outlines thickness={OL} color="#3a1f18" />
-      </mesh>
-      {/* soft rolled collar around the neck */}
-      <mesh position={[0, 1.05, 0.03]} rotation={[Math.PI / 2 - 0.15, 0, 0]} scale={[1.2, 0.9, 1]}>
-        <torusGeometry args={[0.13, 0.035, 12, 32, Math.PI * 1.4]} />
-        <Toon map={map} c="#ffffff" />
-      </mesh>
-    </group>
-  )
-}
-
 export default function Character(props) {
   const torso = useRef()
   const head = useRef()
@@ -196,7 +139,6 @@ export default function Character(props) {
       </group>
       <Arm side={1} />
       <Arm side={-1} />
-      <Blanket />
       {/* neck + head */}
       <Limb a={[0, 1.0, -0.03]} b={[0, 1.13, -0.05]} rad={0.045} c={SKIN} />
       <group ref={head} position={[0, 1.24, -0.06]}>

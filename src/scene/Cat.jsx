@@ -5,11 +5,11 @@ import { Outlines } from '@react-three/drei'
 import { Ball, Toon } from './parts'
 import { tabby } from './textures'
 
-const FUR = '#e59a52'
-const CREAM = '#f6dfbd'
-const LINE = '#4a2a17'
+const FUR = '#a9adb6'
+const CREAM = '#e9eaee'
+const LINE = '#3a3c44'
 
-// An orange tabby curled up asleep on the window seat, tail wrapped around.
+// A grey tabby curled up asleep on the window seat, tail wrapped around.
 export default function Cat(props) {
   const body = useRef()
   const earL = useRef()
@@ -52,7 +52,7 @@ export default function Cat(props) {
       </group>
       {/* tail wrapped round the front, pale tip */}
       <mesh geometry={tail} castShadow>
-        <Toon c="#d98a43" />
+        <Toon c="#8f939d" />
         <Outlines thickness={0.003} color={LINE} />
       </mesh>
       <Ball p={[0.16, -0.05, 0.08]} s={0.027} c={CREAM} />

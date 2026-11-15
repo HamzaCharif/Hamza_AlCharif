@@ -325,8 +325,8 @@ function ArcLamp() {
     new THREE.Vector3(1.05, 0.05, -3.35),
     new THREE.Vector3(1.05, 1.4, -3.4),
     new THREE.Vector3(0.95, 2.15, -3.55),
-    new THREE.Vector3(0.75, 2.25, -3.75),
-    new THREE.Vector3(0.5, 2.0, -3.85),
+    new THREE.Vector3(1.0, 2.2, -3.7),
+    new THREE.Vector3(0.82, 1.95, -3.85),
   ]), [])
   return (
     <group>
@@ -338,15 +338,15 @@ function ArcLamp() {
         <tubeGeometry args={[curve, 40, 0.013, 8, false]} />
         <Toon c="#c9a26a" />
       </mesh>
-      <mesh position={[0.5, 1.9, -3.85]} castShadow>
+      <mesh position={[0.82, 1.83, -3.85]} castShadow>
         <coneGeometry args={[0.17, 0.2, 28, 1, true]} />
         <Toon c="#e7a45a" side={THREE.DoubleSide} />
       </mesh>
-      <mesh position={[0.5, 1.83, -3.85]}>
+      <mesh position={[0.82, 1.76, -3.85]}>
         <sphereGeometry args={[0.045, 14, 10]} />
         <Glow c="#ffe2b0" k={4} />
       </mesh>
-      <pointLight position={[0.5, 1.75, -3.85]} color="#ffb05a" intensity={6} distance={6} decay={1.5}
+      <pointLight position={[0.82, 1.68, -3.85]} color="#ffb05a" intensity={6} distance={6} decay={1.5}
         castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.002} />
     </group>
   )

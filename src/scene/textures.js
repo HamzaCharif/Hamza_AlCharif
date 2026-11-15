@@ -228,9 +228,9 @@ export function buildingWindows(seed) {
 // ---------- Small things ----------
 export const tabby = () =>
   tex('tabby', 256, 128, (g, w, h) => {
-    g.fillStyle = '#e59a52'
+    g.fillStyle = '#b4b8c1'
     g.fillRect(0, 0, w, h)
-    g.strokeStyle = '#c16f2c'
+    g.strokeStyle = '#7f838d'
     g.lineCap = 'round'
     for (let i = 0; i < 14; i++) {
       g.lineWidth = 5 + (i % 3) * 3
@@ -242,8 +242,8 @@ export const tabby = () =>
     }
     // pale belly band
     const grad = g.createLinearGradient(0, h * 0.62, 0, h)
-    grad.addColorStop(0, 'rgba(250,228,196,0)')
-    grad.addColorStop(0.35, 'rgba(250,228,196,1)')
+    grad.addColorStop(0, 'rgba(236,237,241,0)')
+    grad.addColorStop(0.35, 'rgba(236,237,241,1)')
     g.fillStyle = grad
     g.fillRect(0, h * 0.62, w, h * 0.38)
   })

@@ -70,7 +70,7 @@ function GamingChair({ position }) {
         <mesh geometry={back} position={[0, 0, -0.05]} castShadow>
           <Toon c={BLACK} />
         </mesh>
-        <B p={[0, 0.45, 0.07]} s={[0.16, 0.7, 0.01]} c={ACCENT} rad={0.005} />
+        <B p={[0, 0.45, 0.092]} s={[0.16, 0.7, 0.012]} c={ACCENT} rad={0.005} />
         <B p={[0, 0.8, -0.1]} s={[0.24, 0.1, 0.08]} c={BLACK} rad={0.04} />
         <B p={[0, 0.25, -0.1]} s={[0.3, 0.1, 0.07]} c={ACCENT} rad={0.035} />
       </group>
